@@ -76,6 +76,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "no-undef": "off",
+    "no-void": "off",
     "react/no-unstable-nested-components": "off"
   }
 }
