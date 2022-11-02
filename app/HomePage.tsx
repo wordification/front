@@ -2,15 +2,13 @@
 
 import { Typography, List } from "antd";
 
-import Layout from "../src/components/Layout";
-
 const { Text, Title } = Typography;
 const HomePage = ({
   updates,
 }: {
   updates: { title: string; date: string; content: string }[];
 }) => (
-  <Layout>
+  <>
     <Title level={3}>Updates</Title>
     <List
       itemLayout="horizontal"
@@ -21,7 +19,7 @@ const HomePage = ({
         </List.Item>
       )}
     />
-  </Layout>
+  </>
 );
 
 export default HomePage;

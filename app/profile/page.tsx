@@ -3,8 +3,6 @@
 import { Typography } from "antd";
 import { useSession } from "next-auth/react";
 
-import Layout from "../../src/components/Layout";
-
 const { Title } = Typography;
 
 const Page = () => {
@@ -12,9 +10,10 @@ const Page = () => {
   if (!data) return null;
   const { user } = data;
   return (
-    <Layout title={`${user.name}'s Profile`}>
+    <>
+      <Title level={2}>{`${user.name}'s profile`}</Title>
       <Title level={3}>Stats</Title>
-    </Layout>
+    </>
   );
 };
 

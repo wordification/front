@@ -1,5 +1,13 @@
-import Layout from "../../../src/components/Layout";
+"use client";
 
-const Page = () => <Layout title="Sorting Game">Coming soon!</Layout>;
+import { Typography } from "antd";
 
+const { Title, Paragraph } = Typography;
+
+const Page = () => (
+  <>
+    <Title>Sorting Game</Title>
+    <Paragraph>Coming soon!</Paragraph>
+  </>
+);
 export default Page;

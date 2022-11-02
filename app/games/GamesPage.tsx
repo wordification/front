@@ -1,9 +1,9 @@
 "use client";
 
-import { Card, List } from "antd";
+import { Card, List, Typography } from "antd";
 import Link from "next/link";
 
-import Layout from "../../src/components/Layout";
+const { Title } = Typography;
 
 const GamesPage = ({
   games,
@@ -14,7 +14,8 @@ const GamesPage = ({
     url: string;
   }[];
 }) => (
-  <Layout title="Games">
+  <>
+    <Title>Games</Title>
     <List
       grid={{ gutter: 16, column: 2 }}
       dataSource={games}
@@ -28,7 +29,7 @@ const GamesPage = ({
         </List.Item>
       )}
     />
-  </Layout>
+  </>
 );
 
 export default GamesPage;
