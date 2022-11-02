@@ -1,16 +1,16 @@
+"use client";
+
 import { Typography } from "antd";
 import { useSession } from "next-auth/react";
-import React from "react";
 
-import Layout from "../components/Layout";
+import Layout from "../../src/components/Layout";
 
 const { Title } = Typography;
 
-const Profile = () => {
+const Page = () => {
   const { data } = useSession();
   if (!data) return null;
   const { user } = data;
-
   return (
     <Layout title={`${user.name}'s Profile`}>
       <Title level={3}>Stats</Title>
@@ -18,4 +18,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Page;

@@ -1,3 +1,5 @@
+"use client";
+
 import { Breadcrumb, Layout as AntdLayout, Typography } from "antd";
 import Link from "next/link";
 

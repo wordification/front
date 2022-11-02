@@ -1,13 +1,13 @@
 import { Menu as AntdMenu, Typography } from "antd";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 import type { ItemType } from "antd/lib/menu/hooks/useItems";
 
 const { Title } = Typography;
 
 const Menu = () => {
-  const router = useRouter();
+  const pathname = usePathname();
   const items: ItemType[] = [
     {
       key: "home",
@@ -43,7 +43,7 @@ const Menu = () => {
       theme="dark"
       mode="horizontal"
       items={items}
-      selectedKeys={[`${router.asPath}`]}
+      selectedKeys={[pathname]}
     />
   );
 };

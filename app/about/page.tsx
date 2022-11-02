@@ -1,11 +1,12 @@
-import { Typography } from "antd";
-import React from "react";
+"use client";
 
-import Layout from "../components/Layout";
+import { Typography } from "antd";
+
+import Layout from "../../src/components/Layout";
 
 const { Title } = Typography;
 
-const About = () => (
+const Page = () => (
   <Layout title="About Wordification">
     <Title level={3}>What is Wordification?</Title>
     <Title level={3}>What is our goal?</Title>
@@ -13,4 +14,4 @@ const About = () => (
   </Layout>
 );
 
-export default About;
+export default Page;
