@@ -1,21 +1,20 @@
 import { Card, List } from "antd";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import React from "react";
 
 import Layout from "../../components/Layout";
 
 const Games = () => {
-  const router = useRouter();
   const data = [
-    {
-      title: "Matching",
-      content: "Match the cards to win!",
-      onClick: () => void router.push("/games/matching"),
-    },
     {
       title: "Sorting",
       content: "Sort the cards to win!",
-      onClick: () => void router.push("/games/sorting"),
+      url: "/games/sorting",
+    },
+    {
+      title: "Matching",
+      content: "Match the cards to win!",
+      url: "/games/matching",
     },
   ];
   return (
@@ -25,9 +24,11 @@ const Games = () => {
         dataSource={data}
         renderItem={(item) => (
           <List.Item>
-            <Card hoverable onClick={item.onClick} title={item.title}>
-              {item.content}
-            </Card>
+            <Link href={item.url}>
+              <Card hoverable title={item.title}>
+                {item.content}
+              </Card>
+            </Link>
           </List.Item>
         )}
       />
