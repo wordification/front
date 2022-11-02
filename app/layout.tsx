@@ -1,7 +1,6 @@
 "use client";
 
 import { Layout, Menu, Typography } from "antd";
-import "antd/dist/antd.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
