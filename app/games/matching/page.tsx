@@ -1,13 +1,7 @@
-"use client";
-
-import { Typography } from "antd";
-
-const { Title, Paragraph } = Typography;
-
 const Page = () => (
   <>
-    <Title>Matching Game</Title>
-    <Paragraph>Coming soon!</Paragraph>
+    <h2>Matching Game</h2>
+    <p>Coming soon!</p>
   </>
 );
 export default Page;

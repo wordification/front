@@ -1,9 +1,6 @@
 "use client";
 
-import { Typography } from "antd";
 import { useSession } from "next-auth/react";
-
-const { Title } = Typography;
 
 const Page = () => {
   const { data } = useSession();
@@ -11,8 +8,8 @@ const Page = () => {
   const { user } = data;
   return (
     <>
-      <Title level={2}>{`${user.name}'s profile`}</Title>
-      <Title level={3}>Stats</Title>
+      <h2>{`${user.name}'s profile`}</h2>
+      <h3>Stats</h3>
     </>
   );
 };
