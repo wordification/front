@@ -8,6 +8,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ["cupcake", "business"],
+  },
   // eslint-disable-next-line global-require
   plugins: [require("daisyui")],
 };
