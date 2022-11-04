@@ -1,60 +1,35 @@
-"use client";
-
-import Link from "next/link";
+import Navbar from "../ui/Navbar";
 
 import "./globals.css";
 import Providers from "./providers";
 
 const menuItems = [
   {
-    key: "home",
-    label: (
-      <Link href="/">
-        <h2 className="text-2xl">Wordification</h2>
-      </Link>
-    ),
+    url: "/about",
+    label: "About",
   },
   {
-    key: "/about",
-    label: <Link href="/about">About</Link>,
+    url: "/games",
+    label: "Games",
   },
   {
-    key: "/games",
-    label: <Link href="/games">Games</Link>,
+    url: "/profile",
+    label: "Profile",
   },
-  {
-    key: "/profile",
-    label: <Link href="/profile">Profile</Link>,
-  },
-] as const;
+];
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
     <head>
       <title>Wordification</title>
     </head>
-    <body>
+    <body className="flex flex-col min-h-screen">
       <Providers>
-        <header>
-          <nav className="h-16 w-full bg-black bg-opacity-50">
-            <ul className="w-full h-full flex justify-center items-center">
-              {menuItems.map((item) => (
-                <li
-                  className="flex h-full items-center hover:bg-black hover:bg-opacity-50"
-                  key={item.key}
-                >
-                  <span className="mx-4 text-white">{item.label}</span>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <header className="bg-base-200">
+          <Navbar items={menuItems} />
         </header>
-        <main style={{ padding: "0 50px" }}>
-          <div style={{ minHeight: 280, padding: 24, background: "#fff" }}>
-            {children}
-          </div>
-        </main>
-        <footer style={{ textAlign: "center" }}>
+        <main className="container mx-auto p-4 flex-grow">{children}</main>
+        <footer className="p-4 w-full mx-auto text-center bg-base-300">
           &copy; 2022 Wordification
         </footer>
       </Providers>

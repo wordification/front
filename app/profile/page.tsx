@@ -8,8 +8,8 @@ const Page = () => {
   const { user } = data;
   return (
     <>
-      <h2>{`${user.name}'s profile`}</h2>
-      <h3>Stats</h3>
+      <h2 className="text-2xl font-bold">{`${user.name}'s profile`}</h2>
+      <h3 className="text-xl">Stats</h3>
     </>
   );
 };

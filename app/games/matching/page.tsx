@@ -1,6 +1,6 @@
 const Page = () => (
   <>
-    <h2>Matching Game</h2>
+    <h2 className="text-2xl font-bold">Matching Game</h2>
     <p>Coming soon!</p>
   </>
 );
