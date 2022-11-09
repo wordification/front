@@ -22,7 +22,7 @@ const Navbar = ({ items }: { items: MenuItem[] }) => (
     <div className="navbar-start">
       <h1>
         <Link
-          className="normal-case text-xl btn btn-ghost rounded-none"
+          className="normal-case text-xl btn btn-ghost rounded-none text-primary"
           href="/"
         >
           Wordification

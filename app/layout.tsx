@@ -25,12 +25,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </head>
     <body className="flex flex-col min-h-screen">
       <Providers>
-        <header className="bg-base-200">
+        <header className="bg-base-300">
           <Navbar items={menuItems} />
         </header>
-        <main className="container mx-auto p-4 flex-grow">{children}</main>
+        <main className="container mx-auto p-4 md:px-8 flex-grow">
+          {children}
+        </main>
         <footer className="p-4 w-full mx-auto text-center bg-base-300">
-          &copy; 2022 Wordification
+          <p>&copy; 2022 Wordification</p>
         </footer>
       </Providers>
     </body>

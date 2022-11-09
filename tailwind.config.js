@@ -5,7 +5,9 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: ["cupcake", "business"],
+    themes: ["cupcake", "halloween"],
+    darkTheme: "halloween",
+    logs: false,
   },
   // eslint-disable-next-line global-require
   plugins: [require("daisyui")],
