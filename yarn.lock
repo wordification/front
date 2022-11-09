@@ -1601,9 +1601,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"daisyui@npm:^2.38.0":
-  version: 2.38.0
-  resolution: "daisyui@npm:2.38.0"
+"daisyui@npm:^2.38.1":
+  version: 2.38.1
+  resolution: "daisyui@npm:2.38.1"
   dependencies:
     color: ^4.2
     css-selector-tokenizer: ^0.8.0
@@ -1612,7 +1612,7 @@ __metadata:
   peerDependencies:
     autoprefixer: ^10.0.2
     postcss: ^8.1.6
-  checksum: ea112101a8a19a339a0a84c8bb1a12a3ad2b6679b512687e678c43e07aa8a69c8920ad1171623ed30dcf0602c336c38986536638834d386b6bd9b3e21b75949d
+  checksum: 0f36fa53ae8b3903c73b73dd39070da8c09bf6ea21a198d6c52a401fac18f276b0c062c32c4670eb7a1b63cc3753ee9489469adfbab25cb73f63191dc11ce2fe
   languageName: node
   linkType: hard
 
@@ -2444,7 +2444,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.42.0
     autoprefixer: ^10.4.13
     axios: ^1.1.3
-    daisyui: ^2.38.0
+    daisyui: ^2.38.1
     eslint: 8.26.0
     eslint-config-airbnb: ^19.0.4
     eslint-config-next: 13.0.1
