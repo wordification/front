@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class = 'container'>
+    <h1 class = 'text-center'>
+        Completed Games
+    </h1>
+    <div>
+        <table class = 'table table-striped'>
+            <thead class = 'thead-dark'>
+                <tr>
+                    <th scope = 'col'>
+                        #
+                    </th>
+                    <th scope="col">
+                        Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for modelGame in qsCompletedGames %}
+                        <tr class = 'tr__game-entry'>
+                            <th scope="row">
+                                {{forloop.counter}}
+                                </th>
+                                <td>
+                                    <div class = 'd-flex justify-content-between'>
+                                        <div>
+                                            {{modelGame.date}} 
+                                        </div>
+                                        <div>
+                                            <a href = "{% url 'SortingGame:history-detail' modelGame.id %}">
+                                                See Game
+                                            </a>
+                                        </div>
+                                        <div>
+                                            {% if request.user.boolCanAlterStudentData %}
+                                                <span class = "span__game-delete text-danger" data-game-id="{{modelGame.id}}">
+                                                    delete?
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+</div>
+
+<span id = "span__hidden-url-delete" style="display:none">
+    {{strUrlDelete}}
+</span>
+
+<script>
+    // allow users to delete game if permissions
+    // be sure to check in views.py to be sure that it is not a student trying to 
+    // perform this
+    //
+    var strUrlDelete = $('#span__hidden-url-delete').text();
+    $('.span__game-delete').click(function(){
+        let strId = $(this).attr('data-game-id');
+
+        // call ajax to do actual delete        
+        $.ajax({
+            type:'GET',
+            url:strUrlDelete,
+            data:{
+                pk:strId
+            },
+            success:(data)=>{
+                if(data == 'success'){
+                    $(this).closest('.tr__game-entry').remove();
+                }else{
+                    alert('invalid permissions');
+                }
+            }
+        }
+        )
+    });
+
+</script>
+
+{% endblock %}

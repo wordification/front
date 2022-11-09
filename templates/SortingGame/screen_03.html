@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class = 'container border border-dark p-3 rounded'>
+    <!-- 
+            Progress bar
+            Requires a variable 'intPercentComplete'
+        -->
+    {% include 'SortingGame/progress__sorting-game.html' %}
+    <h1 class = 'text-center'>
+        Spell the word.
+    </h1>
+    <div>
+        <div class = 'form-group'>
+            <div class = 'row'>
+                <div class = 'col-10'>
+                    <input 
+                    style="width:100%; height:3rem;
+                    font-size:2rem;
+                    "
+                    class ='form control' id ='text__word-spelling' type = "text">
+                </div>
+                <div class = 'col-2'>
+                    <button 
+                    style="width:100%;height:3rem;"
+                    id="btn__submit-text" class = "btn btn-outline-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- return to game index -->
+    <div>
+        {% include 'game/reusables/btn__back-to-game-index.html' %}
+    </div>
+</div>
+<div>
+    <p>
+        Tested word: {{modelTestedWord}}
+    </p>
+</div>
+
+
+<span style="display:none" id = "span__hidden-check-url">
+    {% url 'SortingGame:ajax-screen_03-spelling-check' %}
+</span>
+
+<span style = "display:none" id = "span__hidden-next-url">
+    {% url 'SortingGame:reroute-last-level' %}
+</span>
+
+<script>
+    var strNextUrl = $("#span__hidden-next-url").text();
+    var strCheckUrl = $("#span__hidden-check-url").text();
+    $("#btn__submit-text").click(()=>{
+        var strSpelling = $('#text__word-spelling').val();
+        $.ajax(
+            {
+                type:"GET",
+                url:strCheckUrl,
+                data:{
+                    strSpelling:strSpelling
+                },
+                success:function(data){
+                    if(data == "correct"){
+                        // correct
+                        $('#btn__submit-text').css('background-color','green');
+                        setTimeout(()=>{
+                            // go to next page
+                            window.location.href = strNextUrl
+                        },1000);
+                    }else{
+                        // incorrect
+                        $('#btn__submit-text').css('background-color','red');
+                        // after a moment change background color to
+                        // regular
+                        //
+                        setTimeout(()=>{
+                            $('#btn__submit-text').css('background-color','');
+                        },1000)
+                    }
+                }
+            },
+        )
+    });
+</script>
+{% endblock %}

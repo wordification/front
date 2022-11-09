@@ -1,0 +1,54 @@
+<!-- 
+Inherit from Core's "base.html" which contains all basic 
+HTML elements, such as Head, Title, imports, so on 
+-->
+
+{% extends "core/base.html"%}
+
+
+{% block content %}
+
+<div class = 'container border border-dark p-3 rounded'>
+    <h1 class = 'text-center'>
+        SortingGame
+    </h1>
+    <hr>
+    <div class = "container">
+        <form method = "POST" action="{% url 'SortingGame:create-game' %}">
+            {% csrf_token %}
+            <div class = 'row'>
+                <div class = 'col-6'>
+                    <select class = 'form-select' name="strPhonemeOne">
+                        {% for strPhoneme, intPhoneme in dictPhonemeOptions.items %}
+                            <option value = "{{intPhoneme}}">
+                                {{strPhoneme}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class = 'col-6'>
+                    <select class = 'form-select' name="strPhonemeTwo">
+                        {% for strPhoneme, intPhoneme in dictPhonemeOptions.items %}
+                            <option value = "{{intPhoneme}}">
+                                {{strPhoneme}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div> 
+            <br>
+            <button type = "submit" class ='btn btn-success'>
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<br>
+
+<!-- return to game index -->
+<div>
+        {% include 'game/reusables/btn__back-to-game-index.html' %}
+</div>
+
+{% endblock content %}

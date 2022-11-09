@@ -1,0 +1,176 @@
+<!-- 
+Inherit from Core's "base.html" which contains all basic 
+HTML elements, such as Head, Title, imports, so on 
+-->
+
+{% extends "core/base.html"%}
+
+<!-- to load static files -->
+{% load static %}
+
+{% block content %}
+
+<div class = 'container border border-dark p-3 rounded'>
+        <!-- 
+                Progress bar
+                Requires a variable 'intPercentComplete'
+         -->
+{% include 'SortingGame/progress__sorting-game.html' %}
+    <h4 class = 'text-center'>
+        Click the correct vowel sound.
+    </h4>
+    <div class = 'row'>
+        <!-- buttons -->
+            <div class = "col-6 text-center">
+                <div>
+                        <button 
+                        style="width:100%;height:4rem;"
+                        class = 'btn btn-primary mb-3' id = "btn__phoneme1" data-url = '{% url "SortingGame:ajax-screen_01-phoneme-check" %}'
+                        data-is-clicked='false'
+                        > 
+                                <strong>
+                                    {{strPhonemeOne}}
+                                </strong>
+                        </button>
+                </div>
+                <div>
+                        <button 
+                        style="width:100%;height:4rem;"
+                        class = 'btn btn-warning' id = "btn__hint-phoneme1" 
+                        data-is-clicked='false'
+                        >
+                                <strong>
+                                    {{strHintOne}}
+                                </strong>
+                        </button>
+                </div>
+            </div>
+            <div class = "col-6 text-center">
+                <div>
+                    <button 
+                    style="width:100%;height:4rem;"
+                    class = 'btn btn-primary mb-3' id = "btn__phoneme2"   >
+                            <strong>
+                                {{strPhonemeTwo}}
+                            </strong>
+                    </button>
+                </div>
+                <div>
+                    <button 
+                    style="width:100%;height:4rem;"
+                    class = 'btn btn-warning' id = "btn__hint-phoneme2">
+                            <strong>
+                                {{strHintTwo}}
+                            </strong>
+                    </button>
+                </div>
+            </div>
+    </div>
+    <br>
+    <div>
+        {% include 'game/reusables/btn__replay-audio.html' %}
+    </div>
+    <!-- audio channel -->
+    <div>
+        {% include 'game/reusables/aud__chan-01.html' %}
+    </div>
+</div>
+
+<!-- hidden urls -->
+<span id = "span__hidden-next-url" style="display:none">
+    {% url 'SortingGame:screen_02' %}
+</span>
+<span id = "span__hidden-check-url" style = 'display:none'>
+    {% url "SortingGame:ajax-screen_01-phoneme-check" %}
+</span>
+
+
+<br>
+
+<!-- return to game index -->
+<div>
+        {% include 'game/reusables/btn__back-to-game-index.html' %}
+</div>
+
+<div>
+        Randomly tested word: {{modelRandomWord}}
+        Correct Phoneme: {{intCorrectPhoneme}}
+</div>
+
+<!-- load static files -->
+<script src="{% static 'general/js/util.js' %}"></script>
+
+<script>
+    // audio utilities
+    var __UTIL = new UTILS(document.getElementById('aud__chan-01'));
+
+    var strNextUrl = $("#span__hidden-next-url").text();
+    var strCheckUrl = $('#span__hidden-check-url').text();
+
+    // add on clicks only after the total duration of audio plays
+    //
+    __UTIL.promiseFetchTotalDuration({{listSndsIntro|safe}}).then((intDuration)=>{
+        setTimeout(()=>{
+            // now allow buttons to be clicked
+            $("#btn__replay-audio").click(()=>{
+
+            })
+            $("#btn__phoneme1").click(()=>{
+                voidTestCorrectness('{{intPhonemeOne|escapejs}}',$("#btn__phoneme1"));
+            });
+            $("#btn__phoneme2").click(()=>{
+                voidTestCorrectness('{{intPhonemeTwo|escapejs}}',$("#btn__phoneme2"));
+            });
+            $("#btn__hint-phoneme1").click(()=>{
+                __UTIL.voidPlaySndAudChanOne('{{strPhonemeOneAudPath|escapejs}}');
+            })
+            $("#btn__hint-phoneme2").click(()=>{
+                __UTIL.voidPlaySndAudChanOne('{{strPhonemeTwoAudPath|escapejs}}');
+            })
+        },__UTIL.floatSecToMs(0));
+    });
+
+    function voidTestCorrectness(intPhoneme,btnBtn){
+        // input: integer value of phoneme, jquery button obj
+        // 
+        // ie: 43 or something (see documentation)
+        // 
+        $.ajax({
+            type:'GET',
+            url:strCheckUrl,
+            data:{
+                intPhoneme:intPhoneme
+            },
+            success:(data)=>{
+                console.log(data);
+                // console.log(JSON.parse(data))
+                // if(data == 'correct'){
+                //     btnBtn.css('background-color','green');
+                //     // go to next screen after period of time
+                //     setTimeout(()=>{
+                //         window.location.href = strNextUrl;
+                //     },1000);
+                // }else{
+                //     btnBtn.css('background-color','red');
+                //     btnBtn.attr('disabled','true');
+                // }
+            }
+        })};
+        
+
+        // play audio
+        $(document).ready(()=>{
+            // array of narration sounds
+
+            let arrSnds ={{listSndsIntro|safe}};
+            // for some reason browsers don't allow
+            // audio to play unless user interacts
+            // we may need to ask users to unblock this feature
+            // https://stackoverflow.com/questions/55537542/how-can-i-enable-autoplay-not-initiated-by-user-in-firefox
+            //
+
+            __UTIL.voidPlaySndArrAudChanOne(arrSnds);
+        });
+</script>
+
+{% endblock content %}

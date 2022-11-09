@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class = 'container border border-dark p-3 rounded'>
+        <!-- 
+                Progress bar
+                Requires a variable 'intPercentComplete'
+         -->
+    {% include 'SortingGame/progress__sorting-game.html' %}
+    <h4 class = 'text-center'>
+        Click the correct spelling pattern.
+    </h4> 
+
+    <div class = 'text-center'>
+        <div id = "d-flex-row justify-content-between">
+            {% for k,v in dictGraphemes.items %}
+                {% for strGrapheme in v %}
+                    <button 
+                    style="width:6rem;height:3rem;"
+                    id = "btn__{{strGrapheme}}" class = "btn btn-outline-success btn__grapheme-choice">
+                        {{ strGrapheme }}
+                    </button>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div>
+        {% include 'game/reusables/btn__replay-audio.html' %}
+    </div>
+    <!-- audio channel -->
+    <div>
+        {% include 'game/reusables/aud__chan-01.html' %}
+    </div>
+</div>
+<div>
+    Tested word: {{modelTestedWord}}
+</div>
+
+<br>
+<!-- return to game index -->
+<div>
+    {% include 'game/reusables/btn__back-to-game-index.html' %}
+</div>
+
+<span style="display:none" id = "span__hidden-check-url">
+    {% url 'SortingGame:ajax-screen_02-grapheme-check' %}
+</span>
+
+<span style="display:none" id= "span__hidden-next-url">
+    {% url 'SortingGame:screen_03' %}
+</span>
+
+<!-- load static files -->
+<script src="{% static 'general/js/util.js' %}"></script>
+
+<script>
+    // audio util
+    var __UTIL = new UTILS(document.getElementById('aud__chan-01'))
+
+    // url to check input
+    var strCheckUrl = $("#span__hidden-check-url").text();
+    // url to go to next screen
+    var strNextUrl =$("#span__hidden-next-url").text();
+
+    // add on clicks only after total duration of aud plays
+    //
+    __UTIL.promiseFetchTotalDuration({{listSndsIntro|safe}}).then((intDuration)=>{
+        // now add onclicks
+        $(".btn__grapheme-choice").each((i,e)=>{
+            $(e).click(()=>{
+                let strGrapheme = $(e).text();
+                $.ajax(
+                    {
+                        type:"GET",
+                        url:strCheckUrl,
+                        data:{
+                            strGrapheme:strGrapheme, 
+                        },
+                        success:function(data){
+                            console.log(data['audio'])
+                            if(data['correctness'] == "correct"){
+                                $(e).css('background-color','green');
+
+                                __UTIL.voidPlaySndArrAudChanOne(data['audio'])
+                                // pause to play audio
+                                //
+                                // setTimeout(()=>{
+                                //     // change page
+                                //     //
+                                //     window.location.href = strNextUrl;
+                                // },1000)
+                            }
+                            else{
+                                __UTIL.voidPlaySndArrAudChanOne(data['audio'])
+                                // disable the button
+                                //
+                                $(e).attr('disabled',true);
+                                $(e).css('background-color','red');
+                            }
+                        }
+                    }
+                )
+            })
+            // replay audio
+            //
+            $("#btn__replay-audio").click(()=>{
+                alert('replay audio')
+            })
+        },__UTIL.floatSecToMs(intDuration));
+    })
+
+    // play audio on start
+    $(document).ready(()=>{
+        let arrIntroSnds = {{listSndsIntro|safe}};
+        __UTIL.voidPlaySndArrAudChanOne(arrIntroSnds)
+    })
+
+
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class = 'container border border-dark p-3 rounded'>
+    <!-- 
+            Progress bar
+            Requires a variable 'intPercentComplete'
+        -->
+    {% include 'SortingGame/progress__sorting-game.html' %}
+    <h1 class = 'text-center'>
+        Game Over
+    </h1>
+    <hr>
+    <div>
+        <div class = 'row'>
+            {% for modelWord in qsWords %}
+                <p>
+                    {{modelWord}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-outline-success" id = "btn__new-game">
+            New Game
+        </button>
+    </div>
+</div>
+
+{% endblock %}
