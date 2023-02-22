@@ -1,24 +1,38 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/consistent-type-definitions */
-import NextAuth from "next-auth";
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-import type { DefaultUser } from "next-auth";
+import type { DefaultSession, User as NextAuthUser } from "next-auth";
 
 declare module "next-auth" {
   /**
-   * The shape of the user object returned in the OAuth providers' `profile` callback,
-   * or the second parameter of the `session` callback, when using a database.
+   * Custom user
    */
-  interface User {
-    id: string;
-    name: string;
+  interface User extends DefaultSession.user {
     email: string;
-    image: string;
+    username: string;
+    date_joined: string;
+    last_login: string;
+    is_admin: boolean;
+    is_superuser: boolean;
+    is_staff: boolean;
+    is_active: boolean;
+    first_name: string;
+    last_name: string;
+    spelling_level: number;
+    time_played: number;
+    percent_correct: number;
+    access_token: string;
   }
 
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
-  interface Session {
+  interface Session extends DefaultSession {
     user: User;
+    accessToken: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface JWT {
+    user: NextAuthUser;
+    accessToken: string;
   }
 }
