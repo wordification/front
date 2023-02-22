@@ -2456,7 +2456,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     husky: ^8.0.1
     next: 13.0.1
-    next-auth: ^4.15.1
+    next-auth: ^4.19.2
     postcss: ^8.4.18
     prettier: ^2.7.1
     react: 18.2.0
@@ -3640,9 +3640,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:^4.15.1":
-  version: 4.15.1
-  resolution: "next-auth@npm:4.15.1"
+"next-auth@npm:^4.19.2":
+  version: 4.19.2
+  resolution: "next-auth@npm:4.19.2"
   dependencies:
     "@babel/runtime": ^7.16.3
     "@panva/hkdf": ^1.0.1
@@ -3661,7 +3661,7 @@ __metadata:
   peerDependenciesMeta:
     nodemailer:
       optional: true
-  checksum: f272375358a0c05ec090dff17e96848bbf5869edc1b2043c86fbc7cf672de72ce57fa6d093c7b6ab8dbbf8268da997e8f5456d4a7caf971f6f4d0d7ff7954438
+  checksum: 7067147c80e4ba9ba328f27c548239895b746a04c0c4faa4f1e0c16cf82eb941ef7ed904a7d3bdf423f07791b471b55f5a2959f66b78495af4f02195d1a59c4e
   languageName: node
   linkType: hard
 
