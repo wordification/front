@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import axios from "../../../../lib/axios";
-
 import type { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
@@ -14,18 +12,20 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        const res = await axios.post<WordificationApi.LoginResponse>(
-          "/auth/login",
-          new URLSearchParams(credentials),
-          {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            timeout: 10000,
-          }
-        );
-        const { user, token } = res.data;
+        if (!process.env.API_BASE_URL) {
+          return null;
+        }
+        const res = await fetch(`${process.env.API_BASE_URL}/auth/login`, {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          method: "POST",
+          body: new URLSearchParams(credentials),
+        });
+
+        const { user, token } =
+          (await res.json()) as WordificationApi.LoginResponse;
 
         // If no error, return it
-        if (res.status === 200) {
+        if (res.ok) {
           return { id: user.email, ...user, access_token: token };
         }
         // Return null if user data could not be retrieved
@@ -33,16 +33,18 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  events: {
-    signOut: ({ session }) =>
-      axios.post(
-        "/auth/logout",
-        new URLSearchParams({ refresh_token: session.accessToken }),
-        {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        }
-      ),
-  },
+  // events: {
+  //   signOut: ({ token }) =>
+  //     process.env.API_BASE_URL
+  //       ? void fetch(`${process.env.API_BASE_URL}/auth/logout`, {
+  //           headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //           method: "POST",
+  //           body: new URLSearchParams({
+  //             refresh_token: token.accessToken,
+  //           }),
+  //         })
+  //       : undefined,
+  // },
   callbacks: {
     jwt: (stuff) => {
       const { token, user } = stuff;
