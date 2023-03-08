@@ -8,7 +8,11 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: {
+          label: "Email",
+          type: "text",
+          placeholder: "jsmith@mail.com",
+        },
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
@@ -21,18 +25,46 @@ export const authOptions: NextAuthOptions = {
           body: new URLSearchParams(credentials),
         });
 
-        const { user, token } =
-          (await res.json()) as WordificationApi.LoginResponse;
-
         // If no error, return it
         if (res.ok) {
-          return { id: user.email, ...user, access_token: token };
+          const { user, token } =
+            (await res.json()) as WordificationApi.LoginResponse;
+
+          return {
+            id: user.email,
+            email: user.email,
+            username: user.username,
+            dateJoined: user.date_joined,
+            spellingLevel: user.spelling_level,
+            timePlayed: user.time_played,
+            percentCorrect: user.percent_correct,
+            accessToken: token,
+          };
         }
+
         // Return null if user data could not be retrieved
         return null;
       },
     }),
   ],
+  callbacks: {
+    jwt: ({ token, user }) => {
+      if (user) {
+        return {
+          ...token,
+          user,
+          accessToken: user.accessToken,
+        };
+      }
+
+      return token;
+    },
+    session: ({ session, token }) => ({
+      ...session,
+      user: token.user,
+      accessToken: token.accessToken,
+    }),
+  },
   // events: {
   //   signOut: ({ token }) =>
   //     process.env.API_BASE_URL
@@ -45,29 +77,6 @@ export const authOptions: NextAuthOptions = {
   //         })
   //       : undefined,
   // },
-  callbacks: {
-    jwt: (stuff) => {
-      const { token, user } = stuff;
-      // Initial sign in
-      if (user) {
-        if (!user.access_token) {
-          throw new Error("No access token");
-        }
-
-        return {
-          accessToken: user.access_token,
-          user,
-        };
-      }
-
-      return token;
-    },
-    session: ({ session, token }) => ({
-      ...session,
-      user: token.user,
-      accessToken: token.accessToken,
-    }),
-  },
 };
 
 export default NextAuth(authOptions);

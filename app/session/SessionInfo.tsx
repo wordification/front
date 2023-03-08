@@ -2,7 +2,13 @@ import SessionClient from "./SessionClient";
 
 import type { Session } from "next-auth";
 
-const Home = ({ session }: { session: Session }) => (
+const Home = ({
+  session,
+  userInfo,
+}: {
+  session: Session;
+  userInfo: WordificationApi.User;
+}) => (
   <div>
     <main>
       <h1>
@@ -18,6 +24,12 @@ const Home = ({ session }: { session: Session }) => (
       <pre>{JSON.stringify(session, null, 2)}</pre>
       <hr />
       <SessionClient />
+      <hr />
+      <p>
+        Here is some Wordification server info about yourself (according to our
+        database):
+      </p>
+      <pre>{JSON.stringify(userInfo, null, 2)}</pre>
     </main>
   </div>
 );
