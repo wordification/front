@@ -1,4 +1,15 @@
 declare namespace WordificationApi {
+  type User = {
+    id: string;
+    email: string;
+    username: string;
+    dateJoined: string;
+    spellingLevel: number;
+    timePlayed: number;
+    percentCorrect: number;
+    accessToken: string;
+  };
+
   type LoginResponse = {
     user: {
       email: string;
