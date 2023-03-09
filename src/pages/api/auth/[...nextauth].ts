@@ -9,11 +9,15 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         username: {
-          label: "Email",
+          label: "Username",
           type: "text",
-          placeholder: "jsmith@mail.com",
+          placeholder: "jsmith",
         },
-        password: { label: "Password", type: "password" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "********",
+        },
       },
       authorize: async (credentials) => {
         if (!process.env.API_BASE_URL) {
