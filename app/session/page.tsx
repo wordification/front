@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth/next";
 
-import fetchServer from "../../lib/fetchServer";
-import { authOptions } from "../../src/pages/api/auth/[...nextauth]";
-
 import SessionInfo from "./SessionInfo";
 
-const getData = async () => fetchServer<WordificationApi.User>("/auth/user");
+import fetchServer from "@/lib/fetch/fetchServer";
+import { authOptions } from "@/src/pages/api/auth/[...nextauth]";
+
+const getData = async () =>
+  fetchServer<WordificationApi.User>("/auth/user").then((res) => res.json());
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
@@ -15,7 +16,7 @@ const Page = async () => {
     throw new Error("No session");
   }
 
-  return <SessionInfo session={session} userInfo={userInfo.data} />;
+  return <SessionInfo session={session} userInfo={userInfo} />;
 };
 
 export default Page;
