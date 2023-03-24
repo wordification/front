@@ -26,7 +26,13 @@
   "ignorePatterns": ["coverage", "build"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
-    "import/extensions": ["error", "never"],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "nextauth]": "always"
+      }
+    ],
     "import/no-unresolved": "off",
     "import/order": [
       "error",
