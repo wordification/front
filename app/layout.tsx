@@ -9,6 +9,10 @@ const menuItems = [
     label: "About",
   },
   {
+    url: "/news",
+    label: "News",
+  },
+  {
     url: "/games",
     label: "Games",
   },
