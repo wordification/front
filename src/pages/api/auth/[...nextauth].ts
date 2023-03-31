@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         if (!process.env.API_BASE_URL) {
-          return null;
+          throw new Error("API URL not set!");
         }
         const res = await fetch(`${process.env.API_BASE_URL}/auth/login`, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
