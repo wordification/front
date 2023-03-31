@@ -51,9 +51,7 @@
     ]
   },
   "packageManager": "yarn@3.2.4",
-  "dependenciesMeta": {
-    "next@13.0.1": {
-      "unplugged": true
-    }
+  "volta": {
+    "node": "18.15.0"
   }
 }
