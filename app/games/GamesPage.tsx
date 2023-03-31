@@ -11,20 +11,20 @@ const GamesPage = ({
 }) => (
   <>
     <h2 className="text-2xl font-bold">Games</h2>
-    <div className="grid sm:grid-cols-2 gap-4">
+    <ul className="grid sm:grid-cols-2 gap-4">
       {games.map((game) => (
         <Link
           href={game.url}
           key={game.url}
           className="card shadow-lg hover:shadow-xl"
         >
-          <div className="card-body">
+          <li className="card-body">
             <h3 className="card-title">{game.title}</h3>
             <p>{game.content}</p>
-          </div>
+          </li>
         </Link>
       ))}
-    </div>
+    </ul>
   </>
 );
 
