@@ -20,14 +20,17 @@ export const authOptions: NextAuthOptions = {
         },
       },
       authorize: async (credentials) => {
-        if (!process.env.API_BASE_URL) {
+        if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
           throw new Error("API URL not set!");
         }
-        const res = await fetch(`${process.env.API_BASE_URL}/auth/login`, {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          method: "POST",
-          body: new URLSearchParams(credentials),
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+          {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            method: "POST",
+            body: new URLSearchParams(credentials),
+          }
+        );
 
         // If no error, return it
         if (res.ok) {
@@ -71,8 +74,8 @@ export const authOptions: NextAuthOptions = {
   },
   // events: {
   //   signOut: ({ token }) =>
-  //     process.env.API_BASE_URL
-  //       ? void fetch(`${process.env.API_BASE_URL}/auth/logout`, {
+  //     process.env.NEXT_PUBLIC_API_BASE_URL
+  //       ? void fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, {
   //           headers: { "Content-Type": "application/x-www-form-urlencoded" },
   //           method: "POST",
   //           body: new URLSearchParams({
