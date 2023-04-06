@@ -25,6 +25,7 @@ const VowelButtons = ({
   options: readonly ButtonProps[];
 }) => (
   <GameCard
+    title="Click on the correct vowel sound."
     options={options}
     columns={2}
     onSelect={(phoneme) => checkPhoneme(gameId, phoneme)}

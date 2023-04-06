@@ -10,10 +10,12 @@ const GameCard = ({
   options,
   columns,
   onSelect,
+  title,
 }: {
   options: readonly ButtonProps[];
   columns: number;
   onSelect: (value: string) => Promise<"correct" | "incorrect">;
+  title: string;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -46,7 +48,7 @@ const GameCard = ({
   return (
     <div className="card w-full bg-base-300 shadow-xl">
       <div className="card-body">
-        <h3 className="card-title">Click on the correct vowel sound.</h3>
+        <h3 className="card-title">{title}</h3>
         <div className={`grid grid-cols-${columns} gap-4`}>
           {options.map((option) => (
             <button
