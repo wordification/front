@@ -1,7 +1,7 @@
 const HomePage = ({
   updates,
 }: {
-  updates: { title: string; date: string; content: string }[];
+  updates: readonly { title: string; date: string; content: string }[];
 }) => (
   <>
     <h2 className="sr-only">Home</h2>

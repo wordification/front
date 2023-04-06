@@ -4,7 +4,7 @@ import fetchServer from "@/lib/fetch/fetchServer";
 import GraphemeButtons from "@/ui/games/sorting/GraphemeButtons";
 
 const getData = async (gameId: string) => {
-  const graphemes = await fetchServer<Record<number, string[]>>(
+  const graphemes = await fetchServer<Record<number, readonly string[]>>(
     `/sorting_game/${gameId}/graphemes/`
   ).then((res) => res.json());
 

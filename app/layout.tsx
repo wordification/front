@@ -3,7 +3,7 @@ import Navbar from "../ui/Navbar";
 import "./globals.css";
 import Providers from "./providers";
 
-const menuItems = [
+const MENU_ITEMS = [
   {
     url: "/about",
     label: "About",
@@ -16,7 +16,7 @@ const menuItems = [
     url: "/profile",
     label: "Profile",
   },
-];
+] as const;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
@@ -26,7 +26,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <body className="flex flex-col min-h-screen">
       <Providers>
         <header className="bg-base-300">
-          <Navbar items={menuItems} />
+          <Navbar items={MENU_ITEMS} />
         </header>
         <main className="container mx-auto p-4 md:px-8 flex-grow">
           {children}
