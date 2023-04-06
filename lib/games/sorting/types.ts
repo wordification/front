@@ -21,7 +21,7 @@ export type WordElement = Readonly<{
 export type SortingGame = Readonly<{
   id: number;
   words: WordElement[];
-  date: Date;
+  date: string;
   level: number;
   intPhonemeOne: number;
   intPhonemeTwo: number;
