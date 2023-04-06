@@ -37,7 +37,6 @@ const Page = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold pb-4">Sorting Game</h2>
       <div className="flex py-4">
         <div className="flex pr-4">
           <label htmlFor="option1">

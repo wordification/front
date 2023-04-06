@@ -20,5 +20,7 @@ const MOCK_PHONEMES = [
 export type PhonemeId = typeof MOCK_PHONEMES[number]["id"];
 
 const getPhonemes = () => MOCK_PHONEMES;
+export const getSpecificPhonemes = (phonemeIds: number[]) =>
+  MOCK_PHONEMES.filter((phoneme) => phonemeIds.includes(phoneme.id));
 
 export default getPhonemes;

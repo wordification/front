@@ -7,36 +7,33 @@ const SortingGameMenu = () => {
       content: "Start a new game",
       url: "/games/sorting/setup",
     },
-    {
-      title: "Resume Game",
-      content: "Resume a game in progress",
-      url: "/games/sorting/setup",
-    },
-    {
-      title: "Completed Games",
-      content: "View completed games",
-      url: "/games/sorting/scores",
-    },
+    // {
+    //   title: "Resume Game",
+    //   content: "Resume a game in progress",
+    //   url: "/games/sorting/setup",
+    // },
+    // {
+    //   title: "Completed Games",
+    //   content: "View completed games",
+    //   url: "/games/sorting/scores",
+    // },
   ];
 
   return (
-    <>
-      <h2 className="text-2xl font-bold">Sorting Game</h2>
-      <ul className="grid sm:grid-cols-3 gap-4">
-        {items.map((item) => (
-          <Link
-            href={item.url}
-            key={item.url}
-            className="card shadow-lg hover:shadow-xl"
-          >
-            <li className="card-body">
-              <h3 className="card-title">{item.title}</h3>
-              <p>{item.content}</p>
-            </li>
-          </Link>
-        ))}
-      </ul>
-    </>
+    <ul className="grid sm:grid-cols-3 gap-4">
+      {items.map((item) => (
+        <Link
+          href={item.url}
+          key={item.url}
+          className="card shadow-lg hover:shadow-xl"
+        >
+          <li className="card-body">
+            <h3 className="card-title">{item.title}</h3>
+            <p>{item.content}</p>
+          </li>
+        </Link>
+      ))}
+    </ul>
   );
 };
 

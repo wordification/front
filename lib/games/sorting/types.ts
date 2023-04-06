@@ -1,4 +1,4 @@
-type Word = {
+export type Word = {
   id: number;
   str_word: string;
   int_grade_level: number;
@@ -9,7 +9,7 @@ type Word = {
   arrstr_sentences: string[];
 };
 
-type WordElement = {
+export type WordElement = {
   id: number;
   word: Word;
   boolBeingTested: boolean;
@@ -27,4 +27,10 @@ export type SortingGame = {
   intPhonemeTwo: number;
   intNumWordsForEachPhoneme: number;
   player: number;
+};
+
+export type ButtonProps = {
+  id: string;
+  label: string;
+  color: "primary" | "secondary" | "accent";
 };
