@@ -3,19 +3,17 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import type { PhonemeId } from "@/lib/games/sorting/getPhonemes";
-
 import createGame from "@/lib/games/sorting/createGame";
 import getPhonemes from "@/lib/games/sorting/getPhonemes";
 
-const Page = () => {
+const Page = async () => {
   const router = useRouter();
-  const phonemeOptions = getPhonemes();
+  const phonemeOptions = await getPhonemes();
 
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
-  const [firstPhonemeId, setFirstPhonemeId] = useState<PhonemeId>(53);
-  const [secondPhonemeId, setSecondPhonemeId] = useState<PhonemeId>(49);
+  const [firstPhonemeId, setFirstPhonemeId] = useState(53);
+  const [secondPhonemeId, setSecondPhonemeId] = useState(49);
 
   // Create inline loading UI
   const isMutating = isFetching || isPending;

@@ -5,7 +5,7 @@ import { getSpecificPhonemes } from "@/lib/games/sorting/getPhonemes";
 
 const FirstLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getGameDetails(gameId);
-  const phonemes = getSpecificPhonemes([
+  const phonemes = await getSpecificPhonemes([
     data.intPhonemeOne,
     data.intPhonemeTwo,
   ]);
