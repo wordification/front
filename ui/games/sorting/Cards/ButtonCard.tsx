@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import toaster from "react-hot-toast";
 
+import GameCard from "./GameCard";
+
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
-const GameCard = ({
+const ButtonCard = ({
   options,
   columns,
   onSelect,
@@ -46,30 +48,22 @@ const GameCard = ({
   const isMutating = isFetching || isPending;
 
   return (
-    <div className="card w-full bg-base-300 shadow-xl">
-      <div className="card-body">
-        <h3 className="card-title">{title}</h3>
-        <div className={`grid grid-cols-${columns} gap-4`}>
-          {options.map((option) => (
-            <button
-              className={`btn btn-${option.color} normal-case`}
-              onClick={(e) => void handleClick(e, option.id)}
-              type="button"
-              disabled={isMutating}
-              key={option.id}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+    <GameCard title={title}>
+      <div className={`grid grid-cols-${columns} gap-4`}>
+        {options.map((option) => (
+          <button
+            className={`btn btn-${option.color} normal-case`}
+            onClick={(e) => void handleClick(e, option.id)}
+            type="button"
+            disabled={isMutating}
+            key={option.id}
+          >
+            {option.label}
+          </button>
+        ))}
       </div>
-      <div className="card-actions justify-end p-4">
-        <button className="btn btn-accent" type="button">
-          Play Sound Again
-        </button>
-      </div>
-    </div>
+    </GameCard>
   );
 };
 
-export default GameCard;
+export default ButtonCard;

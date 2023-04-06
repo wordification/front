@@ -3,7 +3,7 @@
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
 import fetchClient from "@/lib/fetch/fetchClient";
-import GameCard from "@/ui/games/sorting/GameCard";
+import ButtonCard from "@/ui/games/sorting/Cards/ButtonCard";
 
 const checkPhoneme = async (gameId: string, phoneme: string) => {
   const res = await fetchClient<{ status: "correct" | "incorrect" }>(
@@ -24,7 +24,7 @@ const VowelButtons = ({
   gameId: string;
   options: readonly ButtonProps[];
 }) => (
-  <GameCard
+  <ButtonCard
     title="Click on the correct vowel sound."
     options={options}
     columns={2}
