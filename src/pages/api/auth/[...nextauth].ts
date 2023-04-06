@@ -45,6 +45,11 @@ export const authOptions: NextAuthOptions = {
             spellingLevel: user.spelling_level,
             timePlayed: user.time_played,
             percentCorrect: user.percent_correct,
+            canManageStudents:
+              user.is_superuser ||
+              user.is_staff ||
+              user.is_admin ||
+              user.is_teacher,
             accessToken: token,
           };
         }
