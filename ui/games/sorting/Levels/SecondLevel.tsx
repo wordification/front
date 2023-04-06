@@ -17,13 +17,8 @@ const getData = async (gameId: string) => {
 
 const SecondLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getData(gameId);
-  // const options = data.graphemes.map((grapheme) => ({
-  //   label: grapheme,
-  //   color: "secondary" as const,
-  // }));
 
   // loop through the grapheme object and create an array of options
-
   const options = Object.values(data.graphemes)
     .flat()
     .map((grapheme) => ({

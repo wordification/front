@@ -16,7 +16,6 @@ const checkGrapheme = async (gameId: string, grapheme: string) => {
     }
   );
   const { status } = await res.json();
-  console.log(status);
   return status;
 };
 
