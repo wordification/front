@@ -15,6 +15,7 @@ node_modules
 
 # TypeScript
 /build
+tsconfig.tsbuildinfo
 
 # next.js
 /.next

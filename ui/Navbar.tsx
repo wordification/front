@@ -3,7 +3,7 @@ import Link from "next/link";
 export type MenuItem = {
   url: string;
   label: string;
-  submenu?: {
+  submenu?: readonly {
     url: string;
     label: string;
   }[];
@@ -17,7 +17,7 @@ const NavbarItem = ({ item }: { item: MenuItem }) => (
   </li>
 );
 
-const Navbar = ({ items }: { items: MenuItem[] }) => (
+const Navbar = ({ items }: { items: readonly MenuItem[] }) => (
   <nav className="navbar">
     <div className="navbar-start">
       <h1>

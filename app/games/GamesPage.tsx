@@ -3,7 +3,7 @@ import Link from "next/link";
 const GamesPage = ({
   games,
 }: {
-  games: {
+  games: readonly {
     title: string;
     content: string;
     url: string;
