@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import toaster from "react-hot-toast";
 
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
@@ -26,7 +27,11 @@ const GameCard = ({
     setIsFetching(true);
     const status = await onSelect(value);
     setIsFetching(false);
-    if (status !== "correct") return;
+    if (status !== "correct") {
+      toaster.error("Incorrect, please try again.");
+      return;
+    }
+    toaster.success("Correct!");
 
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
