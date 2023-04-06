@@ -21,11 +21,14 @@ const SecondLevel = async ({ gameId }: { gameId: string }) => {
   // loop through the grapheme object and create an array of options
   const options = Object.values(data.graphemes)
     .flat()
-    .map((grapheme) => ({
-      id: grapheme,
-      label: grapheme,
-      color: "secondary" as const,
-    }));
+    .map(
+      (grapheme) =>
+        ({
+          id: grapheme,
+          label: grapheme,
+          color: "primary",
+        } as const)
+    );
 
   return (
     <>

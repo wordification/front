@@ -13,7 +13,7 @@ const FirstLevel = async ({ gameId }: { gameId: string }) => {
     label: phoneme.name,
     color: "secondary" as const,
   }));
-  return <VowelButtons options={options} />;
+  return <VowelButtons options={options} gameId={gameId} />;
 };
 
 export default FirstLevel;
