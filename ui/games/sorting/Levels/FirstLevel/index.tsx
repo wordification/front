@@ -1,6 +1,7 @@
+import FirstLevelButtons from "./FirstLevelButtons";
+
 import getGameDetails from "@/lib/games/sorting/getGameDetails";
 import { getSpecificPhonemes } from "@/lib/games/sorting/getPhonemes";
-import VowelButtons from "@/ui/games/sorting/VowelButtons";
 
 const FirstLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getGameDetails(gameId);
@@ -13,7 +14,7 @@ const FirstLevel = async ({ gameId }: { gameId: string }) => {
     label: phoneme.name,
     color: "secondary" as const,
   }));
-  return <VowelButtons options={options} gameId={gameId} />;
+  return <FirstLevelButtons options={options} gameId={gameId} />;
 };
 
 export default FirstLevel;

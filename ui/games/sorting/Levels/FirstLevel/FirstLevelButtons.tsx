@@ -17,7 +17,7 @@ const checkPhoneme = async (gameId: string, phoneme: string) => {
   return status;
 };
 
-const VowelButtons = ({
+const FirstLevelButtons = ({
   gameId,
   options,
 }: {
@@ -32,4 +32,4 @@ const VowelButtons = ({
   />
 );
 
-export default VowelButtons;
+export default FirstLevelButtons;
