@@ -7,6 +7,7 @@ const Page = () => {
 
   return (
     <>
+      <progress className="progress progress-info" value="50" max="100"></progress>
       <div className="card w-full bg-base-300 shadow-xl">
         <div className="card-body">
           <div className="grid grid-cols-2 mt-6">
