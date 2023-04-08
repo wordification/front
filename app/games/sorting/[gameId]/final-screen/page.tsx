@@ -1,19 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-
-function ProgressBar({progress}) {
-  return (
-    <progress className="progress progress-info" value={progress} max="100"></progress>
-  )
-}
+import { useState } from "react";
 
 const Page = () => {
   const [currentCard, setCurrentCard] = useState(0);
 
   return (
     <>
-      <ProgressBar progress="90" />
+      <progress className="progress progress-info" value="50" max="100"></progress>
       <div className="card w-full bg-base-300 shadow-xl">
         <div className="card-body">
           <div className="grid grid-cols-2 gap-4 mt-6">
