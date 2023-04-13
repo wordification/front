@@ -1,3 +1,5 @@
+import ThirdLevelTextbox from "./ThirdLevelTextbox";
+
 import type { WordElement } from "@/lib/games/sorting/types";
 
 import fetchServer from "@/lib/fetch/fetchServer";
@@ -15,12 +17,10 @@ const ThirdLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getData(gameId);
 
   return (
-    <>
-      <GameCard title="Spell the word.">
-        <p>Coming soon...</p>
-      </GameCard>
+    <GameCard title="Spell the word.">
+      <ThirdLevelTextbox gameId={gameId} />
       <p className="text-sm">Current word: {data.testedWord.word.str_word}</p>
-    </>
+    </GameCard>
   );
 };
 
