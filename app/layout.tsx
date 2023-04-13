@@ -5,10 +5,6 @@ import Providers from "./providers";
 
 const menuItems = [
   {
-    url: "/hello",
-    label: "Hello!",
-  },
-  {
     url: "/about",
     label: "About",
   },

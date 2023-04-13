@@ -11,9 +11,15 @@ const words = words_one.concat(words_two)
           .sort((a, b) => a.sort - b.sort)
           .map(({ value }) => value);
 
+let words_one_done = [""];
+let words_two_done = [""];
+
+let word_picked_first = "";
+
 function Card({word}: {word: string}) {
   const [text, setText] = useState("");
-  const [color, setColor] = useState("lightgreen") 
+  const [color, setColor] = useState("lightgreen");
+  const [done, setDone] = useState(false);
   function handleClick() {
     if (text === "") {
       setText(word);
@@ -22,6 +28,7 @@ function Card({word}: {word: string}) {
       setText("");
       setColor("lightgreen");
     }
+
   }
   
   return <button 
@@ -30,7 +37,8 @@ function Card({word}: {word: string}) {
                    margin: "5px",
                    width:"100px",
                    height:"80px",
-                   padding:"0px" }} 
+                   padding:"0px",
+                   lineHeight: "80px" }} 
           onClick={handleClick}>
             {text}
           </button>
@@ -43,9 +51,6 @@ const cardList = words.map((word) => (
 cardList.splice(6, 0, <br></br>)
 cardList.splice(13, 0, <br></br>)
 cardList.splice(20, 0, <br></br>)
-
-const words_one_done = ["test1.1", "test1.2"];
-const words_two_done = ["test2.1"];
 
 function Bucket({ words_done, phoneme }: { words_done: string[], phoneme: string }) {
   return (
