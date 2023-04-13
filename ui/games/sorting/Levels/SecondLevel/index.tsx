@@ -1,7 +1,8 @@
+import SecondLevelButtons from "./SecondLevelButtons";
+
 import type { WordElement } from "@/lib/games/sorting/types";
 
 import fetchServer from "@/lib/fetch/fetchServer";
-import GraphemeButtons from "@/ui/games/sorting/GraphemeButtons";
 
 const getData = async (gameId: string) => {
   const graphemes = await fetchServer<Record<number, readonly string[]>>(
@@ -32,7 +33,7 @@ const SecondLevel = async ({ gameId }: { gameId: string }) => {
 
   return (
     <>
-      <GraphemeButtons gameId={gameId} options={options} />
+      <SecondLevelButtons gameId={gameId} options={options} />
       <p className="text-sm">Current word: {data.testedWord.word.str_word}</p>
     </>
   );

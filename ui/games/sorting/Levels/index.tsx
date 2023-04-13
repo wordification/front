@@ -1,5 +1,6 @@
 import FirstLevel from "./FirstLevel";
 import SecondLevel from "./SecondLevel";
+import ThirdLevel from "./ThirdLevel";
 
 const CurrentLevel = ({ gameId, level }: { gameId: string; level: number }) => {
   switch (level) {
@@ -10,7 +11,8 @@ const CurrentLevel = ({ gameId, level }: { gameId: string; level: number }) => {
       // @ts-expect-error Next 13 async component
       return <SecondLevel gameId={gameId} />;
     case 3:
-      return <p>Coming soon... (3)</p>;
+      // @ts-expect-error Next 13 async component
+      return <ThirdLevel gameId={gameId} />;
     case 4:
       return <p>Coming soon... (4)</p>;
     default:
