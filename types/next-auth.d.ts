@@ -1,24 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/consistent-type-definitions */
-import NextAuth from "next-auth";
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-import type { DefaultUser } from "next-auth";
+import type { DefaultSession, User as NextAuthUser } from "next-auth";
 
 declare module "next-auth" {
   /**
-   * The shape of the user object returned in the OAuth providers' `profile` callback,
-   * or the second parameter of the `session` callback, when using a database.
+   * Custom user
    */
-  interface User {
-    id: string;
-    name: string;
-    email: string;
-    image: string;
+  interface User extends WordificationApi.User, DefaultSession.User {
+    accessToken: string;
   }
 
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
-  interface Session {
+  interface Session extends DefaultSession {
     user: User;
+    accessToken: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface JWT {
+    user: Exclude<NextAuthUser, "accessToken">;
+    accessToken: string;
   }
 }
