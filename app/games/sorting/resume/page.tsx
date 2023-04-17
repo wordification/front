@@ -1,10 +1,8 @@
-import Link from "next/link";
-
 import type { SortingGame } from "@/lib/games/sorting/types";
 
-import DeleteButton from "@/app/games/sorting/resume/DeleteButton";
 import fetchServer from "@/lib/fetch/fetchServer";
 import getCurrentUser from "@/lib/user/getCurrentUser";
+import GameTable from "@/ui/games/sorting/GameTable";
 
 const getData = async () =>
   fetchServer<SortingGame[]>("/sorting_game/unfinished/").then((res) =>
@@ -19,38 +17,8 @@ const Page = async () => {
 
   return (
     <>
-      <h3 className="py-4">Unfinished Games</h3>
-      <table className="table table-compact">
-        <thead>
-          <tr>
-            <th>Game Number</th>
-            <th>Started At</th>
-            <th className="text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((game) => (
-            <tr key={game.id}>
-              <td>{game.id}</td>
-              <td>
-                {new Date(game.date).toLocaleString(undefined, {
-                  dateStyle: "medium",
-                  timeStyle: "short",
-                })}
-              </td>
-              <td className="text-right btn-group">
-                <Link
-                  className="btn btn-xs btn-outline"
-                  href={`/games/sorting/${game.id}`}
-                >
-                  Resume
-                </Link>
-                {canManageStudents && <DeleteButton gameId={game.id} />}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h3 className="py-4 font-extrabold text-xl">Unfinished Games</h3>
+      <GameTable showDelete={canManageStudents} showResume games={data} />
     </>
   );
 };
