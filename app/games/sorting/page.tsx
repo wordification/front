@@ -10,13 +10,13 @@ const SortingGameMenu = () => {
     {
       title: "Resume Game",
       content: "Resume a game in progress",
-      url: "/games/sorting/resume",
+      url: "/games/sorting/unfinished",
     },
-    // {
-    //   title: "Completed Games",
-    //   content: "View completed games",
-    //   url: "/games/sorting/scores",
-    // },
+    {
+      title: "Completed Games",
+      content: "View completed games",
+      url: "/games/sorting/finished",
+    },
   ];
 
   return (
