@@ -31,7 +31,7 @@ const Page = () => {
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
-      router.push(`/games/sorting/details/${data.id}`);
+      router.push(`/games/sorting/${data.id}`);
     });
   };
 
