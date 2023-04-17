@@ -16,6 +16,10 @@ const MENU_ITEMS = [
     url: "/profile",
     label: "Profile",
   },
+  {
+    url: "/api/auth/signout",
+    label: "Sign Out",
+  },
 ] as const;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
