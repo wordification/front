@@ -17,10 +17,38 @@ const fetchBase = async <T>(
     : { ...init?.headers };
   const res = await fetch(baseUrl, { ...init, headers });
 
+  if (!res.ok) {
+    let data: unknown;
+    try {
+      data = await res.json();
+    } catch (e) {
+      try {
+        data = await res.text();
+      } catch (subError) {
+        data = e ?? subError;
+      }
+    }
+
+    throw new Error(
+      `Request failed with status ${res.status}, text ${
+        res.statusText
+      } and data ${JSON.stringify(data)}`
+    );
+  }
+
   return {
     ...res,
-    json: async () => (await res.json()) as T,
-    text: async () => (await res.text()) as T,
+    json: async () => {
+      try {
+        const data = (await res.json()) as T;
+        return data;
+      } catch (err) {
+        if (err instanceof Error) {
+          throw new Error(`Failed to parse JSON: ${JSON.stringify(err)}`);
+        }
+        throw new Error("Failed to parse JSON");
+      }
+    },
   };
 };
 
