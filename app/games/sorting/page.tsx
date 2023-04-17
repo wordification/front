@@ -7,11 +7,11 @@ const SortingGameMenu = () => {
       content: "Start a new game",
       url: "/games/sorting/setup",
     },
-    // {
-    //   title: "Resume Game",
-    //   content: "Resume a game in progress",
-    //   url: "/games/sorting/setup",
-    // },
+    {
+      title: "Resume Game",
+      content: "Resume a game in progress",
+      url: "/games/sorting/resume",
+    },
     // {
     //   title: "Completed Games",
     //   content: "View completed games",

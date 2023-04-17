@@ -2,7 +2,9 @@ import Link from "next/link";
 
 import type { SortingGame } from "@/lib/games/sorting/types";
 
+import DeleteButton from "@/app/games/sorting/resume/DeleteButton";
 import fetchServer from "@/lib/fetch/fetchServer";
+import getCurrentUser from "@/lib/user/getCurrentUser";
 
 const getData = async () =>
   fetchServer<SortingGame[]>("/sorting_game/unfinished/").then((res) =>
@@ -13,6 +15,7 @@ const Page = async () => {
   const data = (await getData()).sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+  const { canManageStudents } = await getCurrentUser();
 
   return (
     <>
@@ -42,6 +45,7 @@ const Page = async () => {
                 >
                   Resume
                 </Link>
+                {canManageStudents && <DeleteButton gameId={game.id} />}
               </td>
             </tr>
           ))}
