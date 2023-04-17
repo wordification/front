@@ -1,11 +1,10 @@
 import "client-only";
 
-import type { PhonemeId } from "./getPhonemes";
 import type { SortingGame } from "./types";
 
 import fetchClient from "@/lib/fetch/fetchClient";
 
-const createGame = async (phoneme1: PhonemeId, phoneme2: PhonemeId) => {
+const createGame = async (phoneme1: number, phoneme2: number) => {
   const res = await fetchClient<SortingGame>(
     "http://127.0.0.1:8000/api/sorting_game/",
     {
