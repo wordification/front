@@ -8,6 +8,7 @@ declare namespace WordificationApi {
     timePlayed: number;
     percentCorrect: number;
     accessToken: string;
+    canManageStudents: boolean;
   };
 
   type LoginResponse = {
@@ -20,6 +21,8 @@ declare namespace WordificationApi {
       is_superuser: boolean;
       is_staff: boolean;
       is_active: boolean;
+      is_student: boolean;
+      is_teacher: boolean;
       first_name: string;
       last_name: string;
       spelling_level: number;

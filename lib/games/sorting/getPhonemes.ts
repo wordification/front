@@ -1,26 +1,13 @@
-const MOCK_PHONEMES = [
-  {
-    id: 40,
-    name: "Short I",
-  },
-  {
-    id: 49,
-    name: "Long I",
-  },
-  {
-    id: 55,
-    name: "Short O",
-  },
-  {
-    id: 53,
-    name: "Long O",
-  },
-] as const;
+import fetchServer from "@/lib/fetch/fetchServer";
 
-export type PhonemeId = typeof MOCK_PHONEMES[number]["id"];
+const getPhonemes = () =>
+  fetchServer<{ id: number; name: string }[]>(
+    "/sorting_game/phoneme_options/"
+  ).then((res) => res.json());
 
-const getPhonemes = () => MOCK_PHONEMES;
 export const getSpecificPhonemes = (phonemeIds: readonly number[]) =>
-  MOCK_PHONEMES.filter((phoneme) => phonemeIds.includes(phoneme.id));
+  getPhonemes().then((phonemes) =>
+    phonemes.filter((phoneme) => phonemeIds.includes(phoneme.id))
+  );
 
 export default getPhonemes;
