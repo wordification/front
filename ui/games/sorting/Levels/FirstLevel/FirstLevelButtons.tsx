@@ -3,7 +3,7 @@
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
 import fetchClient from "@/lib/fetch/fetchClient";
-import ButtonCard from "@/ui/games/sorting/Cards/ButtonCard";
+import ButtonCardContents from "@/ui/games/sorting/Cards/ButtonCardContents";
 
 const checkPhoneme = async (gameId: string, phoneme: string) => {
   const res = await fetchClient<{ status: "correct" | "incorrect" }>(
@@ -24,7 +24,7 @@ const FirstLevelButtons = ({
   gameId: string;
   options: readonly ButtonProps[];
 }) => (
-  <ButtonCard
+  <ButtonCardContents
     options={options}
     columns={2}
     onSelect={(phoneme) => checkPhoneme(gameId, phoneme)}

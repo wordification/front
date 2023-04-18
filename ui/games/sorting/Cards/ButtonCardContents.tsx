@@ -6,7 +6,7 @@ import toaster from "react-hot-toast";
 
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
-const ButtonCard = ({
+const ButtonCardContents = ({
   options,
   columns,
   onSelect,
@@ -60,4 +60,4 @@ const ButtonCard = ({
   );
 };
 
-export default ButtonCard;
+export default ButtonCardContents;
