@@ -25,7 +25,6 @@ const GraphemeButtons = ({
   options: readonly ButtonProps[];
 }) => (
   <ButtonCard
-    title="Click on the correct spelling pattern."
     options={options}
     columns={6}
     onSelect={(grapheme) => checkGrapheme(gameId, grapheme)}

@@ -3,6 +3,8 @@ const GameCard = ({
   children,
 }: {
   title: string;
+  // eslint-disable-next-line react/no-unused-prop-types
+  files: string[];
   children: React.ReactNode;
 }) => (
   <div className="card w-full bg-base-300 shadow-xl">

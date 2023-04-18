@@ -4,20 +4,16 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import toaster from "react-hot-toast";
 
-import GameCard from "./GameCard";
-
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
 const ButtonCard = ({
   options,
   columns,
   onSelect,
-  title,
 }: {
   options: readonly ButtonProps[];
   columns: number;
   onSelect: (value: string) => Promise<"correct" | "incorrect">;
-  title: string;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -48,21 +44,19 @@ const ButtonCard = ({
   const isMutating = isFetching || isPending;
 
   return (
-    <GameCard title={title}>
-      <div className={`grid grid-cols-${columns} gap-4`}>
-        {options.map((option) => (
-          <button
-            className={`btn btn-${option.color} normal-case`}
-            onClick={(e) => void handleClick(e, option.id)}
-            type="button"
-            disabled={isMutating}
-            key={option.id}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
-    </GameCard>
+    <div className={`grid grid-cols-${columns} gap-4`}>
+      {options.map((option) => (
+        <button
+          className={`btn btn-${option.color} normal-case`}
+          onClick={(e) => void handleClick(e, option.id)}
+          type="button"
+          disabled={isMutating}
+          key={option.id}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
   );
 };
 

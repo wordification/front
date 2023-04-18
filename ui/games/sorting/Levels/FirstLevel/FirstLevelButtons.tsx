@@ -25,7 +25,6 @@ const FirstLevelButtons = ({
   options: readonly ButtonProps[];
 }) => (
   <ButtonCard
-    title="Click on the correct vowel sound."
     options={options}
     columns={2}
     onSelect={(phoneme) => checkPhoneme(gameId, phoneme)}

@@ -15,9 +15,10 @@ const getData = async (gameId: string) => {
 
 const ThirdLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getData(gameId);
+  const audio = { files: [] };
 
   return (
-    <GameCard title="Spell the word.">
+    <GameCard title="Spell the word." files={audio.files}>
       <ThirdLevelTextbox gameId={gameId} />
       <p className="text-sm">Current word: {data.testedWord.word.str_word}</p>
     </GameCard>
