@@ -6,15 +6,14 @@ import fetchClient from "@/lib/fetch/fetchClient";
 import ButtonCardContents from "@/ui/games/sorting/Cards/ButtonCardContents";
 
 const checkGrapheme = async (gameId: string, grapheme: string) => {
-  const res = await fetchClient<{ status: "correct" | "incorrect" }>(
+  const res = await fetchClient<WordificationApi.GradingResponse>(
     `/sorting_game/${gameId}/grade_screen_two/`,
     {
       method: "POST",
       body: new URLSearchParams({ grapheme }),
     }
   );
-  const { status } = await res.json();
-  return status;
+  return res.json();
 };
 
 const GraphemeButtons = ({

@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-const PlaySoundButton = ({ files }: { files: string[] }) => {
+const Player = ({
+  files,
+  buttonLabel,
+}: {
+  files: string[];
+  buttonLabel?: string;
+}) => {
   const [currentFileIndex, setCurrentFileIndex] = useState(0);
 
   const handleFinish = () => {
@@ -17,13 +23,19 @@ const PlaySoundButton = ({ files }: { files: string[] }) => {
 
   return (
     <>
-      <button className="btn btn-accent" type="button" onClick={handleRestart}>
-        Play Sound Again
-      </button>
+      {buttonLabel && (
+        <button
+          className="btn btn-accent"
+          type="button"
+          onClick={handleRestart}
+        >
+          {buttonLabel}
+        </button>
+      )}
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio src={files[currentFileIndex]} onEnded={handleFinish} autoPlay />
     </>
   );
 };
 
-export default PlaySoundButton;
+export default Player;

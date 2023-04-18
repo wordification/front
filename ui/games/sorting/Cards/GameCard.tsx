@@ -1,4 +1,4 @@
-import PlaySoundButton from "@/ui/audio/PlaySoundButton";
+import Player from "@/ui/audio/Player";
 
 const GameCard = ({
   title,
@@ -15,7 +15,7 @@ const GameCard = ({
       {children}
     </div>
     <div className="card-actions justify-end p-4">
-      <PlaySoundButton files={files} />
+      <Player files={files} buttonLabel="Play audio again" />
     </div>
   </div>
 );
