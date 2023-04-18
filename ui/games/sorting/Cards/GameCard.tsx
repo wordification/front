@@ -1,9 +1,11 @@
+import PlaySoundButton from "@/ui/audio/PlaySoundButton";
+
 const GameCard = ({
   title,
+  files,
   children,
 }: {
   title: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   files: string[];
   children: React.ReactNode;
 }) => (
@@ -13,9 +15,7 @@ const GameCard = ({
       {children}
     </div>
     <div className="card-actions justify-end p-4">
-      <button className="btn btn-accent" type="button">
-        Play Sound Again
-      </button>
+      <PlaySoundButton files={files} />
     </div>
   </div>
 );
