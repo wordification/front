@@ -5,17 +5,17 @@ import { useState, useTransition } from "react";
 import toaster from "react-hot-toast";
 
 import fetchClient from "@/lib/fetch/fetchClient";
+import Player from "@/ui/audio/Player";
 
 const checkSpelling = async (gameId: string, entry: string) => {
-  const res = await fetchClient<{ status: "correct" | "incorrect" }>(
+  const res = await fetchClient<WordificationApi.GradingResponse>(
     `/sorting_game/${gameId}/grade_screen_three/`,
     {
       method: "POST",
       body: new URLSearchParams({ entry }),
     }
   );
-  const { status } = await res.json();
-  return status;
+  return res.json();
 };
 
 const ThirdLevelTextbox = ({ gameId }: { gameId: string }) => {
@@ -23,13 +23,17 @@ const ThirdLevelTextbox = ({ gameId }: { gameId: string }) => {
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
   const [entry, setEntry] = useState("");
+  const [files, setFiles] = useState<string[] | undefined>(undefined);
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    const status = await checkSpelling(gameId, entry);
+    const grade = await checkSpelling(gameId, entry);
     setIsFetching(false);
-    if (status !== "correct") {
+    if (grade.audio?.files) {
+      setFiles(grade.audio.files);
+    }
+    if (grade.status !== "correct") {
       toaster.error("Incorrect, please try again.");
       return;
     }
@@ -46,28 +50,31 @@ const ThirdLevelTextbox = ({ gameId }: { gameId: string }) => {
   const isMutating = isFetching || isPending;
 
   return (
-    <div className="form-control">
-      <div className="input-group">
-        <input
-          type="text"
-          className="input input-bordered"
-          id="entry"
-          name="entry"
-          value={entry}
-          onChange={(e) => setEntry(e.target.value)}
-          placeholder="Type your answer here."
-          disabled={isMutating}
-        />
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={(e) => void handleClick(e)}
-          disabled={isMutating}
-        >
-          Submit
-        </button>
+    <>
+      {files && <Player files={files} />}
+      <div className="form-control">
+        <div className="input-group">
+          <input
+            type="text"
+            className="input input-bordered"
+            id="entry"
+            name="entry"
+            value={entry}
+            onChange={(e) => setEntry(e.target.value)}
+            placeholder="Type your answer here."
+            disabled={isMutating}
+          />
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={(e) => void handleClick(e)}
+            disabled={isMutating}
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

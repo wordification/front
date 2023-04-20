@@ -3,6 +3,7 @@ import ThirdLevelTextbox from "./ThirdLevelTextbox";
 import type { WordElement } from "@/lib/games/sorting/types";
 
 import fetchServer from "@/lib/fetch/fetchServer";
+import getAudio from "@/lib/games/sorting/getAudio";
 import GameCard from "@/ui/games/sorting/Cards/GameCard";
 
 const getData = async (gameId: string) => {
@@ -15,7 +16,7 @@ const getData = async (gameId: string) => {
 
 const ThirdLevel = async ({ gameId }: { gameId: string }) => {
   const data = await getData(gameId);
-  const audio = { files: [] };
+  const audio = await getAudio(gameId);
 
   return (
     <GameCard title="Spell the word." files={audio.files}>
