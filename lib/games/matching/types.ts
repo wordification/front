@@ -12,8 +12,8 @@ export type Word = Readonly<{
   export type WordElement = Readonly<{
     id: number;
     word: Word;
-    boolBeingTested: boolean;
-    tested_grapheme: string;
+    boolChosenFirst: boolean;
+    strTestedPhoneme: string;
     boolComplete: boolean;
     game: number;
   }>;
@@ -27,4 +27,10 @@ export type Word = Readonly<{
     intPhonemeTwo: number;
     intNumWordsForEachPhoneme: number;
     player: number;
+  }>;
+
+  export type ButtonProps = Readonly<{
+    id: number;
+    text: string;
+    flipped: boolean;
   }>;

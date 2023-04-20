@@ -24,14 +24,14 @@ const Page = () => {
     e.preventDefault();
     setIsFetching(true);
 
-    const data = await createGame(firstPhonemeId, secondPhonemeId).then((res) =>
+    const data = await createGame(firstPhonemeId, secondPhonemeId, 12).then((res) =>
       res.json()
     );
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
-      router.push(`/games/matching/details/${data.id}`);
+      router.push(`/games/matching/${data.id}`);
     });
   };
 
