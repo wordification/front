@@ -31,4 +31,9 @@ declare namespace WordificationApi {
     };
     token: string;
   };
+
+  type GradingResponse = {
+    status: "correct" | "incorrect";
+    audio?: { files: string[] };
+  };
 }

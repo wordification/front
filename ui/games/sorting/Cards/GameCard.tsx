@@ -1,8 +1,12 @@
+import Player from "@/ui/audio/Player";
+
 const GameCard = ({
   title,
+  files,
   children,
 }: {
   title: string;
+  files: string[];
   children: React.ReactNode;
 }) => (
   <div className="card w-full bg-base-300 shadow-xl">
@@ -11,9 +15,7 @@ const GameCard = ({
       {children}
     </div>
     <div className="card-actions justify-end p-4">
-      <button className="btn btn-accent" type="button">
-        Play Sound Again
-      </button>
+      <Player files={files} buttonLabel="Play audio again" />
     </div>
   </div>
 );

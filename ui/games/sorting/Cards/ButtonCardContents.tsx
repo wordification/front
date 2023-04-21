@@ -4,24 +4,23 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import toaster from "react-hot-toast";
 
-import GameCard from "./GameCard";
-
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
-const ButtonCard = ({
+import Player from "@/ui/audio/Player";
+
+const ButtonCardContents = ({
   options,
   columns,
   onSelect,
-  title,
 }: {
   options: readonly ButtonProps[];
   columns: number;
-  onSelect: (value: string) => Promise<"correct" | "incorrect">;
-  title: string;
+  onSelect: (value: string) => Promise<WordificationApi.GradingResponse>;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
+  const [files, setFiles] = useState<string[] | undefined>(undefined);
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -29,9 +28,12 @@ const ButtonCard = ({
   ) => {
     e.preventDefault();
     setIsFetching(true);
-    const status = await onSelect(value);
+    const grade = await onSelect(value);
     setIsFetching(false);
-    if (status !== "correct") {
+    if (grade.audio?.files) {
+      setFiles(grade.audio.files);
+    }
+    if (grade.status !== "correct") {
       toaster.error("Incorrect, please try again.");
       return;
     }
@@ -48,7 +50,10 @@ const ButtonCard = ({
   const isMutating = isFetching || isPending;
 
   return (
-    <GameCard title={title}>
+    <>
+      <div />
+      {files && <Player files={files} />}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <div className={`grid grid-cols-${columns} gap-4`}>
         {options.map((option) => (
           <button
@@ -62,8 +67,8 @@ const ButtonCard = ({
           </button>
         ))}
       </div>
-    </GameCard>
+    </>
   );
 };
 
-export default ButtonCard;
+export default ButtonCardContents;

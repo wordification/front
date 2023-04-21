@@ -3,18 +3,17 @@
 import type { ButtonProps } from "@/lib/games/sorting/types";
 
 import fetchClient from "@/lib/fetch/fetchClient";
-import ButtonCard from "@/ui/games/sorting/Cards/ButtonCard";
+import ButtonCardContents from "@/ui/games/sorting/Cards/ButtonCardContents";
 
 const checkPhoneme = async (gameId: string, phoneme: string) => {
-  const res = await fetchClient<{ status: "correct" | "incorrect" }>(
+  const res = await fetchClient<WordificationApi.GradingResponse>(
     `/sorting_game/${gameId}/grade_screen_one/`,
     {
       method: "POST",
       body: new URLSearchParams({ phoneme }),
     }
   );
-  const { status } = await res.json();
-  return status;
+  return res.json();
 };
 
 const FirstLevelButtons = ({
@@ -24,8 +23,7 @@ const FirstLevelButtons = ({
   gameId: string;
   options: readonly ButtonProps[];
 }) => (
-  <ButtonCard
-    title="Click on the correct vowel sound."
+  <ButtonCardContents
     options={options}
     columns={2}
     onSelect={(phoneme) => checkPhoneme(gameId, phoneme)}
