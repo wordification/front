@@ -25,7 +25,7 @@ const FirstLevelButtons = ({
     words: readonly ButtonProps[];
 }) => (
     <Cards
-        title="Pick a pair of cards and see if they match."
+        title="Pick a pair of cards and see if the phonemes match."
         words={words}
         columns={6}
         rows={4}

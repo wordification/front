@@ -35,7 +35,7 @@ const Cards = ({
     setIsFetching(false);
     if (status === "incorrect") {
         toaster.error("Different phonemes, please try again.");
-    } else {
+    } else if (status == "correct") {
         toaster.success("Match!");
     }
 
